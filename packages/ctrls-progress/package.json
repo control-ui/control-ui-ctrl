@@ -1,0 +1,54 @@
+{
+    "name": "@ui-controls/progress",
+    "version": "0.0.1",
+    "description": "Material-UI Button + IconButton with progress (loading/error/success)",
+    "homepage": "https://bemit.codes",
+    "author": "Michael Becker <michael@bemit.codes>",
+    "license": "MIT",
+    "keywords": [
+        "mui",
+        "material",
+        "material-ui",
+        "react",
+        "reactjs",
+        "react-component",
+        "ui",
+        "control"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/control-ui/control-ui-ctrl.git",
+        "directory": "packages/ctrls-progress"
+    },
+    "bugs": {
+        "url": "https://github.com/control-ui/control-ui-ctrl/issues"
+    },
+    "main": "index.js",
+    "module": "esm/index.js",
+    "scripts": {
+        "dtsgen": "tsc -d --emitDeclarationOnly --pretty && merge-dirs build/dts/src build && rm -rf build/dts && rm -rf build/**/*.test.* build/**/*.mock.*",
+        "__release": "cp package.json build/ && cp package-lock.json build/ && cp README.md build/ && npm publish build"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "@types/react": "^18.0",
+        "@types/react-dom": "^18.0",
+        "@mui/material": "^5.1",
+        "@mui/icons-material": "^5.1",
+        "@emotion/react": "^11.9.0",
+        "@emotion/styled": "^11.8.1",
+        "react": "^18.0",
+        "react-progress-state": "~0.2.3",
+        "react-dom": "^18.0"
+    },
+    "peerDependencies": {
+        "@mui/material": "^5.1",
+        "react-progress-state": "~0.2.3",
+        "react": "^17.0.2 || ^18.0.0",
+        "react-dom": "^17.0.2 || ^18.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
