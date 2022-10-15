@@ -28,7 +28,8 @@ export type IconButtonProgressProps = IconButtonProgressConfirmProps & Omit<Icon
     onClick: () => void
     boxSx?: SxProps
     boxStyle?: React.CSSProperties
-    // forces `ps.none` as initial, defaults to `true`
+    // when `true` will display any `progress` color from mount on,
+    // `false` forces `ps.none`, only when then changed it shows the actual button-state
     showInitial?: boolean
 }
 

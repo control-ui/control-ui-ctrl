@@ -17,7 +17,8 @@ export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithCon
     onClick: () => void
     boxStyle?: React.CSSProperties
     boxSx?: SxProps
-    // forces `ps.none` as initial, defaults to `true`
+    // when `true` will display any `progress` color from mount on,
+    // `false` forces `ps.none`, only when then changed it shows the actual button-state
     showInitial?: boolean
 }
 
