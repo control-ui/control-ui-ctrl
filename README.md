@@ -5,7 +5,12 @@
 [![MIT license](https://img.shields.io/npm/l/@ui-controls/progress?style=flat-square)](https://github.com/control-ui/control-ui-ctrl/blob/main/LICENSE)
 ![Typed](https://flat.badgen.net/badge/icon/Typed?icon=typescript&label&labelColor=blue&color=555555)
 
-- @ui-controls/progress [![npm (scoped)](https://img.shields.io/npm/v/@ui-controls/progress?style=flat-square)](https://www.npmjs.com/package/@ui-controls/progress)
+Reusable ui-controls as React components, make nicer interactive React Web Apps, build with [MUI](https://mui.com).
+
+*Packages:*
+
+- `@ui-controls/progress` [![npm (scoped)](https://img.shields.io/npm/v/@ui-controls/progress?style=flat-square)](https://www.npmjs.com/package/@ui-controls/progress) [![repo](https://img.shields.io/badge/Example%20Repo-green?labelColor=000000&color=f4f6f7&logoColor=ffffff&style=flat-square&logo=github)](https://github.com/control-ui/demo-ctrl-progress)
+    - `Button`/`IconButton` with `two-click-to-confirm` and `progress` states using the `@mui` semantic colors
 
 ## Versions
 
