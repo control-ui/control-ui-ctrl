@@ -12,10 +12,14 @@ export const DemoProgress: React.FC<{}> = () => {
     const [loading3, setLoading3, startLoading3] = useProgress()
     const [loading4, setLoading4, startLoading4] = useProgress()
     const [show, setShow] = React.useState(true)
+    const [disabled, setDisabled] = React.useState(false)
     return <>
         <Box style={{display: 'flex', flexWrap: 'wrap'}}>
             <Button size={'small'} onClick={() => setShow(s => !s)}>
                 {show ? 'hide' : 'show'}
+            </Button>
+            <Button size={'small'} onClick={() => setDisabled(s => !s)}>
+                {disabled ? 'enabled' : 'disabled'}
             </Button>
         </Box>
         {show ? <>
@@ -33,12 +37,29 @@ export const DemoProgress: React.FC<{}> = () => {
                             }, 600)
                         }}
                     >
+                        submit w/ success no dis.
+                    </ButtonProgress>
+                </Box>
+                <Box mr={2} mb={2}>
+                    <ButtonProgress
+                        progress={loading1.progress}
+                        disabled={disabled}
+                        onClick={() => {
+                            const pid = startLoading1()
+                            window.setTimeout(() => {
+                                const isPid = setLoading1(ps.done, undefined, pid)
+                                if(!isPid) return
+                                console.log('done', pid)
+                            }, 600)
+                        }}
+                    >
                         submit w/ success
                     </ButtonProgress>
                 </Box>
                 <Box mr={2} mb={2}>
                     <ButtonProgress
                         progress={loading2.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading2()
                             window.setTimeout(() => {
@@ -56,6 +77,7 @@ export const DemoProgress: React.FC<{}> = () => {
                 <Box mr={2} mb={2}>
                     <IconButtonProgress
                         progress={loading3.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading3()
                             window.setTimeout(() => {
@@ -72,6 +94,7 @@ export const DemoProgress: React.FC<{}> = () => {
                 <Box mr={2} mb={2}>
                     <IconButtonProgress
                         progress={loading4.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading4()
                             window.setTimeout(() => {
@@ -103,6 +126,23 @@ export const DemoProgress: React.FC<{}> = () => {
                             }, 600)
                         }}
                     >
+                        submit w/ success no dis.
+                    </ButtonProgress>
+                </Box>
+                <Box mr={2} mb={2}>
+                    <ButtonProgress
+                        showInitial
+                        progress={loading1.progress}
+                        disabled={disabled}
+                        onClick={() => {
+                            const pid = startLoading1()
+                            window.setTimeout(() => {
+                                const isPid = setLoading1(ps.done, undefined, pid)
+                                if(!isPid) return
+                                console.log('done', pid)
+                            }, 600)
+                        }}
+                    >
                         submit w/ success
                     </ButtonProgress>
                 </Box>
@@ -110,6 +150,7 @@ export const DemoProgress: React.FC<{}> = () => {
                     <ButtonProgress
                         showInitial
                         progress={loading2.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading2()
                             window.setTimeout(() => {
@@ -128,6 +169,7 @@ export const DemoProgress: React.FC<{}> = () => {
                     <IconButtonProgress
                         showInitial
                         progress={loading3.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading3()
                             window.setTimeout(() => {
@@ -145,6 +187,7 @@ export const DemoProgress: React.FC<{}> = () => {
                     <IconButtonProgress
                         showInitial
                         progress={loading4.progress}
+                        disabled={disabled}
                         onClick={() => {
                             const pid = startLoading4()
                             window.setTimeout(() => {

@@ -21,11 +21,9 @@ Only with a text:
 
 ```jsx
 import React from 'react'
-import {ps, useProgress} from 'react-progress-state'
 import {ButtonConfirm} from '@ui-controls/progress/ButtonConfirm'
 
 export const DemoProgress = () => {
-    const [loading, setLoading, startLoading] = useProgress()
     return <>
         <ButtonConfirm
             confirmText={'Click to confirm'}
@@ -43,13 +41,11 @@ With text, initial-icon and confirm icon:
 
 ```jsx
 import React from 'react'
-import {ps, useProgress} from 'react-progress-state'
 import {ButtonConfirm} from '@ui-controls/progress/ButtonConfirm'
 import IcDelete from '@mui/icons-material/DeleteOutline'
 import IcDeleteConfirm from '@mui/icons-material/Delete'
 
 export const DemoProgress = () => {
-    const [loading, setLoading, startLoading] = useProgress()
     return <>
         <ButtonConfirm
             confirmText={'Click to confirm'}
@@ -69,13 +65,11 @@ export const DemoProgress = () => {
 
 ```jsx
 import React from 'react'
-import {ps, useProgress} from 'react-progress-state'
-import {ButtonConfirm} from '@ui-controls/progress/ButtonConfirm'
+import {IconButtonConfirm} from '@ui-controls/progress/IconButtonConfirm'
 import IcDelete from '@mui/icons-material/DeleteOutline'
 import IcDeleteConfirm from '@mui/icons-material/Delete'
 
 export const DemoProgress = () => {
-    const [loading, setLoading, startLoading] = useProgress()
     return <>
         <IconButtonConfirm
             tooltip={'delete'}

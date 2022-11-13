@@ -2,12 +2,13 @@ import React from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
 import useTheme from '@mui/material/styles/useTheme'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
-import { buttonColors } from '@ui-controls/progress/buttonColors'
+import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 
 export interface WithConfirmProps {
     confirmIcon: React.ReactNode
     confirmText: React.ReactNode | string
     confirmDuration?: number
+    resetDelay?: number
 }
 
 export type HasConfirm =
@@ -22,6 +23,7 @@ export type ButtonConfirmProps =
         classNameWrapper?: string
         resetVal?: any
         onClick: () => void
+        colorMap?: ColorMap
     }
 
 export const ButtonConfirm: React.ComponentType<ButtonConfirmProps> = (
@@ -34,12 +36,13 @@ export const ButtonConfirm: React.ComponentType<ButtonConfirmProps> = (
         confirmText, confirmDuration,
         sx,
         resetVal, disabled,
+        colorMap,
         ...props
     },
 ) => {
     const {confirmShow, handleClick, setConfirmShow} = useWithConfirm(resetVal ? [resetVal] : undefined, confirmDuration)
     const theme = useTheme()
-    const btnSx = buttonColors(theme)
+    const btnSx = buttonColors(theme, colorMap)
 
     React.useEffect(() => {
         if(!disabled) return

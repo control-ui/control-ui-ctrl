@@ -5,7 +5,7 @@ import { green } from '@mui/material/colors'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { ProgressStateValues, ps } from 'react-progress-state'
 import Box from '@mui/material/Box'
-import { buttonColors } from '@ui-controls/progress/buttonColors'
+import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { WithConfirmProps } from '@ui-controls/progress/ButtonConfirm'
 import { SxProps } from '@mui/material'
 import { useButtonProgress } from '@ui-controls/progress/useButtonProgress/useButtonProgress'
@@ -20,6 +20,7 @@ export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithCon
     // when `true` will display any `progress` color from mount on,
     // `false` forces `ps.none`, only when then changed it shows the actual button-state
     showInitial?: boolean
+    colorMap?: ColorMap
 }
 
 export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
@@ -29,19 +30,21 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
         boxStyle, boxSx,
         onClick, children,
         confirmIcon, confirmText, confirmDuration,
+        resetDelay,
         endIcon, sx,
         fullWidth,
         disabled,
         showInitial,
+        colorMap,
         ...props
     },
 ) => {
     const {
         progressState, currentProgress,
         handleClick, confirmShow,
-    } = useButtonProgress(progress, resetVal, disabled, showInitial, confirmDuration)
+    } = useButtonProgress(progress, resetVal, disabled, showInitial, confirmDuration, resetDelay)
     const theme = useTheme()
-    const btnSx = buttonColors(theme)
+    const btnSx = buttonColors(theme, colorMap)
     const hasConfirm = Boolean(confirmIcon || confirmText)
     return <Box
         className={classNameWrapper}
@@ -55,7 +58,8 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
     >
         <Button
             {...props}
-            disabled={disabled || currentProgress === ps.start}
+            // `disabled` must check against the original `progress`, to be able to not rely on any coloring logic
+            disabled={disabled || progress === ps.start}
             className={className}
             sx={{
                 ...sx || {},
