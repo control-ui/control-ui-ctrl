@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import { SxProps } from '@mui/material'
-import { buttonColors } from '@ui-controls/progress/buttonColors'
+import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { useButtonProgress } from '@ui-controls/progress/useButtonProgress/useButtonProgress'
 
 export type IconButtonProgressConfirmProps = {
@@ -31,6 +31,10 @@ export type IconButtonProgressProps = IconButtonProgressConfirmProps & Omit<Icon
     // when `true` will display any `progress` color from mount on,
     // `false` forces `ps.none`, only when then changed it shows the actual button-state
     showInitial?: boolean
+    resetDelay?: number
+    // when `true` enabled pointer-events on the tooltip
+    tooltipInteractive?: boolean
+    colorMap?: ColorMap
 }
 
 export const IconButtonProgress: React.ComponentType<IconButtonProgressProps> = (
@@ -39,32 +43,37 @@ export const IconButtonProgress: React.ComponentType<IconButtonProgressProps> = 
         size = 'medium',
         progress, resetVal,
         confirmIcon, confirmDuration,
+        resetDelay,
         tooltipConfirm, tooltip, tooltipDisabled,
         children,
         boxStyle, boxSx,
-        style, sx,
+        sx,
         showInitial,
+        tooltipInteractive = false,
+        colorMap,
         ...props
     },
 ) => {
     const {
         progressState, currentProgress,
         handleClick, confirmShow,
-    } = useButtonProgress(progress, resetVal, disabled, showInitial, confirmDuration)
+    } = useButtonProgress(progress, resetVal, disabled, showInitial, confirmDuration, resetDelay)
     const theme = useTheme()
-    const btnSx = buttonColors(theme)
+    const btnSx = buttonColors(theme, colorMap)
 
     const hasConfirm = Boolean(tooltipConfirm)
     const title = disabled && tooltipDisabled ? tooltipDisabled :
         confirmShow && hasConfirm ? tooltipConfirm : tooltip
-    return <Tooltip title={typeof title === 'undefined' ? '' : title}>
+    return <Tooltip
+        title={typeof title === 'undefined' ? '' : title}
+        disableInteractive={!tooltipInteractive}
+    >
         <Box style={{display: 'inline-flex', ...boxStyle}} component={'span'} sx={boxSx}>
             <IconButton
                 color={'inherit'}
                 {...props}
-                style={{display: 'flex', ...style}}
                 size={size}
-                disabled={disabled || currentProgress === ps.start}
+                disabled={disabled || progress === ps.start}
                 sx={{
                     marginLeft: 0,
                     position: 'relative',

@@ -10,20 +10,20 @@ export const useButtonProgress = (
     // this property forces `ps.none` as initial
     showInitial?: boolean,
     confirmDuration?: number,
+    resetDelay?: number,
 ) => {
     const isMounted = React.useRef<boolean>(false)
     const currentProgress = React.useMemo(() => {
         if(showInitial || isMounted.current) return progress
         return ps.none
     }, [progress, showInitial])
-    const {progressState, setProgressState} = useWithProgress(currentProgress, resetVal ? [resetVal] : [])
+    const {progressState} = useWithProgress(currentProgress, resetVal ? [resetVal] : [], resetDelay)
     const {confirmShow, handleClick, setConfirmShow} = useWithConfirm(resetVal ? [resetVal] : [], confirmDuration)
 
     React.useEffect(() => {
         if(!disabled) return
-        setProgressState(0)
         setConfirmShow(false)
-    }, [disabled, setConfirmShow, setProgressState])
+    }, [disabled, setConfirmShow])
 
     React.useEffect(() => {
         isMounted.current = true
