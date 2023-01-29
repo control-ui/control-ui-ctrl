@@ -2,10 +2,15 @@ import React from 'react'
 import { ButtonConfirm } from '@ui-controls/progress/ButtonConfirm'
 import { IconButtonConfirm } from '@ui-controls/progress/IconButtonConfirm'
 import Box from '@mui/material/Box'
+import MuiList from '@mui/material/List'
 import IcDelete from '@mui/icons-material/DeleteOutline'
 import IcDeleteConfirm from '@mui/icons-material/Delete'
 import IcLogout from '@mui/icons-material/Logout'
 import IcConfirm from '@mui/icons-material/QuestionMark'
+import { ListItemButtonConfirm } from '@ui-controls/progress/ListItemButtonConfirm'
+import { ListItem } from '@mui/material'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemButton from '@mui/material/ListItemButton'
 
 export const DemoConfirm: React.FC<{}> = () => {
     return <>
@@ -98,6 +103,84 @@ export const DemoConfirm: React.FC<{}> = () => {
                     <IcLogout/>
                 </IconButtonConfirm>
             </Box>
+        </Box>
+        <Box mb={2}>
+            {/* list-item */}
+            <MuiList>
+                <ListItem>
+                    <ListItemText
+                        primary={'List Item'}
+                        secondary={'only text'}
+                    />
+                </ListItem>
+                <ListItemButtonConfirm
+                    onClick={() => {
+                        console.log('confirm', new Date())
+                    }}
+                    sx={{py: 0}}
+                    icon={<IcLogout/>}
+                    confirmText={'Click to confirm'}
+                    confirmIcon={<IcConfirm/>}
+                    primary={'Logout'}
+                    secondaryTypographyProps={{variant: 'caption'}}
+                    secondary={'from App'}
+                />
+                <ListItemButton onClick={() => undefined}>
+                    <ListItemText
+                        primary={'List Item'}
+                        secondary={'as button'}
+                    />
+                </ListItemButton>
+                <ListItemButtonConfirm
+                    onClick={() => {
+                        console.log('confirm', new Date())
+                    }}
+                    sx={{py: 0}}
+                    icon={<IcLogout/>}
+                    confirmText={'Click to confirm'}
+                    confirmIcon={<IcConfirm/>}
+                    primary={'Logout'}
+                />
+            </MuiList>
+        </Box>
+        <Box mb={2}>
+            {/* list-item dense */}
+            <MuiList dense>
+                <ListItem>
+                    <ListItemText
+                        primary={'List Item'}
+                        secondary={'only text'}
+                    />
+                </ListItem>
+                <ListItemButtonConfirm
+                    onClick={() => {
+                        console.log('confirm', new Date())
+                    }}
+                    sx={{py: 0}}
+                    icon={<IcLogout/>}
+                    confirmText={'Click to confirm'}
+                    confirmIcon={<IcConfirm/>}
+                    primary={'Logout'}
+                    secondaryTypographyProps={{variant: 'caption'}}
+                    secondary={'from App'}
+                />
+                <ListItemButton onClick={() => undefined}>
+                    <ListItemText
+                        primary={'List Item'}
+                        secondary={'as button'}
+                    />
+                </ListItemButton>
+                <ListItemButtonConfirm
+                    onClick={() => {
+                        console.log('confirm', new Date())
+                    }}
+                    sx={{py: 0}}
+                    icon={<IcLogout/>}
+                    confirmText={'Click to confirm'}
+                    confirmIcon={<IcConfirm/>}
+                    primary={'Logout'}
+                />
+            </MuiList>
         </Box>
     </>
 }

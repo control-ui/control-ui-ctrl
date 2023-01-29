@@ -261,10 +261,39 @@ export const DemoPage = () => {
 }
 ```
 
+## Example `ListItemButtonConfirm`
+
+```jsx
+import React from 'react'
+import {ListItemButtonConfirm} from '@ui-controls/progress/ListItemButtonConfirm'
+import MuiList from '@mui/material/List'
+import IcLogout from '@mui/icons-material/Logout'
+import IcConfirm from '@mui/icons-material/QuestionMark'
+
+export const DemoPage = () => {
+    return <>
+        <MuiList>
+            <ListItemButtonConfirm
+                onClick={() => {
+                    console.log('confirm', new Date())
+                }}
+                sx={{py: 0}}
+                icon={<IcLogout/>}
+                confirmText={'Click to confirm'}
+                confirmIcon={<IcConfirm/>}
+                primary={'Logout'}
+                secondaryTypographyProps={{variant: 'caption'}}
+                secondary={'from App'}
+            />
+        </MuiList>
+    </>
+}
+```
+
 ## License
 
 This project is free software distributed under the **MIT License**.
 
 See: [LICENSE](https://github.com/control-ui/control-ui-ctrl/blob/main/LICENSE).
 
-© 2022 bemit UG (haftungsbeschränkt)
+© 2023 bemit UG (haftungsbeschränkt)
