@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { WithConfirmProps } from '@ui-controls/progress/ButtonConfirm'
 import { SxProps } from '@mui/material'
-import { useButtonProgress } from '@ui-controls/progress/useButtonProgress/useButtonProgress'
+import { useButtonProgress } from '@ui-controls/progress/useButtonProgress'
 
 export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithConfirmProps> & {
     progress: ProgressStateValues

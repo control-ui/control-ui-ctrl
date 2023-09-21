@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { App } from './App'
 
-render(
-    <React.Profiler id="Pickers Demo App" onRender={() => null}>
+const root = document.querySelector('#root')
+if(!root) throw new Error('Missing PWA root')
+createRoot(root)
+    .render(<React.Profiler id="Pickers Demo App" onRender={() => null}>
         <App/>
-    </React.Profiler>,
-    document.querySelector('#root'),
-)
+    </React.Profiler>)
