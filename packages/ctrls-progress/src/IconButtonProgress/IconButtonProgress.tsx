@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import { SxProps } from '@mui/material'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
-import { useButtonProgress } from '@ui-controls/progress/useButtonProgress/useButtonProgress'
+import { useButtonProgress } from '@ui-controls/progress/useButtonProgress'
 
 export type IconButtonProgressConfirmProps = {
     confirmIcon?: React.ReactNode
