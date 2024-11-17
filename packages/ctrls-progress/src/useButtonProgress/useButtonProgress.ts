@@ -15,6 +15,7 @@ export const useButtonProgress = (
     const isMounted = React.useRef<boolean>(false)
     const currentProgress = React.useMemo(() => {
         if(showInitial || isMounted.current) return progress
+        // todo: when disabled, allow ending current but do not apply when starting from new
         return ps.none
     }, [progress, showInitial])
     const {progressState} = useWithProgress(currentProgress, resetVal ? [resetVal] : [], resetDelay)

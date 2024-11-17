@@ -8,7 +8,7 @@ import IcDeleteConfirm from '@mui/icons-material/Delete'
 import IcLogout from '@mui/icons-material/Logout'
 import IcConfirm from '@mui/icons-material/QuestionMark'
 import { ListItemButtonConfirm } from '@ui-controls/progress/ListItemButtonConfirm'
-import { ListItem } from '@mui/material'
+import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 

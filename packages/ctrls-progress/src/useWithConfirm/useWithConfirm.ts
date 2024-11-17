@@ -9,7 +9,7 @@ export const useWithConfirm = (resetVal?: any[], confirmDuration: number = 2500)
     React.useEffect(() => {
         setConfirmShow(false)
         // eslint-disable-next-line
-    }, resetVal || [])
+    }, [...resetVal || []])
 
     const handleClick = React.useCallback((confirmShow: boolean, onClick: () => void) => {
         if(confirmShow) {

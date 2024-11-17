@@ -1,12 +1,14 @@
 import React from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 
 export interface WithConfirmProps {
     confirmIcon: React.ReactNode
     confirmText: React.ReactNode | string
+    // todo: add optional dialog view instead of button label switch
+    // confirmDialog?: boolean
     confirmDuration?: number
     resetDelay?: number
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
 import Tooltip from '@mui/material/Tooltip'
@@ -40,6 +40,7 @@ export const IconButtonConfirm: React.ComponentType<IconButtonConfirmProps> = (
     }, [disabled, setConfirmShow])
 
     const title: string | NonNullable<React.ReactNode> = (confirmShow ? tooltipConfirm : tooltip) as string | NonNullable<React.ReactNode>
+    // todo: use describeChild
     return <Tooltip
         title={typeof title === 'undefined' ? '' : title}
         disableInteractive={!tooltipInteractive}

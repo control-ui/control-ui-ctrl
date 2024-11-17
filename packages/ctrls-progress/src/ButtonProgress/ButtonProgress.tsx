@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme } from '@mui/material/styles'
+import { useTheme, SxProps } from '@mui/material/styles'
 import CircularProgress from '@mui/material/CircularProgress'
 import { green } from '@mui/material/colors'
 import Button, { ButtonProps } from '@mui/material/Button'
@@ -7,7 +7,6 @@ import { ProgressStateValues, ps } from 'react-progress-state'
 import Box from '@mui/material/Box'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { WithConfirmProps } from '@ui-controls/progress/ButtonConfirm'
-import { SxProps } from '@mui/material'
 import { useButtonProgress } from '@ui-controls/progress/useButtonProgress'
 
 export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithConfirmProps> & {
