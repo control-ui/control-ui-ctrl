@@ -1,6 +1,6 @@
 {
     "name": "@ui-controls/progress",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Material-UI Button + IconButton with progress (loading/error/success)",
     "homepage": "https://bemit.codes",
     "author": "Michael Becker <michael@bemit.codes>",
@@ -26,9 +26,10 @@
     "main": "index.js",
     "module": "esm/index.js",
     "scripts": {
-        "dtsgen": "tsc -d --emitDeclarationOnly --pretty && merge-dirs build/dts/src build && rm -rf build/dts && rm -rf build/**/*.test.* build/**/*.mock.*",
+        "dtsgen": "tsc -d --emitDeclarationOnly --pretty && node ../../tools/merge-dirs build/dts/packages/ctrls-progress/src build && rm -rf build/dts && rm -rf build/**/*.test.* build/**/*.mock.*",
         "__release": "cp package.json build/ && cp package-lock.json build/ && cp README.md build/ && npm publish build"
     },
+    "sideEffects": false,
     "dependencies": {
     },
     "devDependencies": {
@@ -39,14 +40,14 @@
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "react": "^18.0",
-        "react-progress-state": "~0.3.1",
+        "react-progress-state": "~0.3.2",
         "react-dom": "^18.0"
     },
     "peerDependencies": {
         "@mui/material": "^5.1",
         "react-progress-state": "~0.2.3 || ~0.3.1",
-        "react": "^17.0.2 || ^18.0.0",
-        "react-dom": "^17.0.2 || ^18.0.0"
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
     },
     "publishConfig": {
         "access": "public"

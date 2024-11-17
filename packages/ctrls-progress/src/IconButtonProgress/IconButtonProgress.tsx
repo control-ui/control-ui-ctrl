@@ -3,9 +3,8 @@ import Tooltip from '@mui/material/Tooltip'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import { ProgressStateValues, ps } from 'react-progress-state'
 import CircularProgress from '@mui/material/CircularProgress'
-import { useTheme } from '@mui/material/styles'
+import { useTheme, SxProps } from '@mui/material/styles'
 import Box from '@mui/material/Box'
-import { SxProps } from '@mui/material'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { useButtonProgress } from '@ui-controls/progress/useButtonProgress'
 
@@ -64,6 +63,7 @@ export const IconButtonProgress: React.ComponentType<IconButtonProgressProps> = 
     const hasConfirm = Boolean(tooltipConfirm)
     const title = disabled && tooltipDisabled ? tooltipDisabled :
         confirmShow && hasConfirm ? tooltipConfirm : tooltip
+    // todo: use describeChild
     return <Tooltip
         title={typeof title === 'undefined' ? '' : title}
         disableInteractive={!tooltipInteractive}

@@ -1,7 +1,11 @@
-const path = require('path');
-const {packer, webpack} = require('lerna-packer');
-const {makeModulePackageJson, copyRootPackageJson, transformForEsModule} = require('lerna-packer/packer/modulePackages');
-const fs = require('fs');
+import path from 'path'
+import url from 'url'
+import {packer, webpack} from 'lerna-packer'
+import {babelTargetsLegacyCjsFirst} from 'lerna-packer/packer/babelEsModules.js'
+import {makeModulePackageJson, copyRootPackageJson, transformerForLegacyCjsFirst} from 'lerna-packer/packer/modulePackages.js'
+import fs from 'fs'
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 packer({
     apps: {
@@ -19,6 +23,11 @@ packer({
                     progress: false,
                 },
             },
+            plugins: [
+                new webpack.DefinePlugin({
+                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                }),
+            ],
             publicPath: '/',
         },
     },
@@ -28,12 +37,13 @@ packer({
             name: '@ui-controls/progress',
             root: path.resolve(__dirname, 'packages', 'ctrls-progress'),
             entry: path.resolve(__dirname, 'packages', 'ctrls-progress/src/'),
+            babelTargets: babelTargetsLegacyCjsFirst,
         },
     },
 }, __dirname, {
     afterEsModules: (packages, pathBuild, isServing) => {
         return Promise.all([
-            makeModulePackageJson(transformForEsModule)(
+            makeModulePackageJson(transformerForLegacyCjsFirst)(
                 Object.keys(packages).reduce(
                     (packagesFiltered, pack) =>
                         packages[pack].esmOnly ? packagesFiltered : {...packagesFiltered, [pack]: packages[pack]},

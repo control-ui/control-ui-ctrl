@@ -1,3 +1,36 @@
 {
-    "extends": "./packages/tsconfig.json"
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2019",
+        "jsx": "react-jsx",
+        "removeComments": false,
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noEmit": false,
+        "experimentalDecorators": true,
+        "rootDir": "./",
+        "baseUrl": "./",
+        "allowSyntheticDefaultImports": true,
+        "noErrorTruncation": true,
+        "allowJs": true,
+        "declaration": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "noUnusedParameters": true,
+        "paths": {
+            "@ui-controls/progress": [
+                "packages/ctrls-progress/src"
+            ],
+            "@ui-controls/progress/*": [
+                "packages/ctrls-progress/src/*"
+            ]
+        }
+    },
+    "exclude": [
+        "**/build/",
+        "**/node_modules/"
+    ]
 }
