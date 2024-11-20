@@ -1,17 +1,19 @@
-import React from 'react'
-import { ProgressStateValues, ps } from 'react-progress-state'
+import { useEffect, useRef, useState } from 'react'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
 
-export const useWithProgress = (progress: ProgressStateValues, resetVal?: any[], resetDelay: number = 1800) => {
-    const timer = React.useRef<number>()
-    const [progressState, setProgressState] = React.useState<0 | 1 | -1>(0)
-    React.useEffect(() => {
+export const useWithProgress = (progress: ProgressStateValues, resetVal?: any, resetDelay: number = 1800) => {
+    const timer = useRef<number>()
+    const [progressState, setProgressState] = useState<0 | 1 | -1>(0)
+    useEffect(() => {
         setProgressState(0)
-        // eslint-disable-next-line
-    }, resetVal || [])
+        return () => {
+            window.clearTimeout(timer.current)
+        }
+    }, [resetVal])
 
-    const isSuccess = progress === ps.done
+    const isSuccess = progress === ps.success
     const isError = progress === ps.error
-    React.useEffect(() => {
+    useEffect(() => {
         if(isSuccess) {
             setProgressState(1)
         } else if(isError) {
@@ -30,6 +32,5 @@ export const useWithProgress = (progress: ProgressStateValues, resetVal?: any[],
     return {
         timer,
         progressState,
-        setProgressState,
     }
 }

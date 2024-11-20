@@ -12,31 +12,43 @@ export const colorMapDefault: ColorMap = (theme: Theme) => ({
     confirm: theme.palette.mode === 'dark' ? theme.palette.warning.dark : theme.palette.warning.light,
 })
 
+const colorCache: Map<string, string> = new Map()
+
+const cachedColor = (
+    color: string,
+    getContrastText: (color: string) => string,
+): string => {
+    if(!colorCache.has(color)) {
+        colorCache.set(color, getContrastText(color))
+    }
+    return colorCache.get(color)!
+}
+
 export const buttonColors = (theme: Theme, colorMap: ColorMap = colorMapDefault) => {
     const colors = colorMap(theme)
     return {
         buttonSuccess: {
             backgroundColor: colors.success,
-            color: theme.palette.getContrastText(colors.success),
+            color: cachedColor(colors.success, theme.palette.getContrastText),
             '&:hover': {
                 backgroundColor: colors.success,
-                color: theme.palette.getContrastText(colors.success),
+                color: cachedColor(colors.success, theme.palette.getContrastText),
             },
         },
         buttonError: {
             backgroundColor: colors.error,
-            color: theme.palette.getContrastText(colors.error),
+            color: cachedColor(colors.error, theme.palette.getContrastText),
             '&:hover': {
                 backgroundColor: colors.error,
-                color: theme.palette.getContrastText(colors.error),
+                color: cachedColor(colors.error, theme.palette.getContrastText),
             },
         },
         buttonConfirm: {
             backgroundColor: colors.confirm,
-            color: theme.palette.getContrastText(colors.confirm),
+            color: cachedColor(colors.confirm, theme.palette.getContrastText),
             '&:hover': {
                 backgroundColor: colors.confirm,
-                color: theme.palette.getContrastText(colors.confirm),
+                color: cachedColor(colors.confirm, theme.palette.getContrastText),
             },
         },
     }

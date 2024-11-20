@@ -1,4 +1,4 @@
-import React from 'react'
+import { MouseEvent, ReactNode, useEffect } from 'react'
 import { useTheme } from '@mui/material/styles'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
@@ -14,12 +14,12 @@ export type ListItemButtonConfirmProps =
     Pick<ListItemTextProps, 'primary' | 'primaryTypographyProps' | 'secondary' | 'secondaryTypographyProps'> &
     {
         resetVal?: any
-        onClick: () => void
+        onClick: (e: MouseEvent<HTMLDivElement>) => void
         colorMap?: ColorMap
-        icon: React.ReactNode
+        icon: ReactNode
     }
 
-export const ListItemButtonConfirm: React.ComponentType<ListItemButtonConfirmProps> = (
+export const ListItemButtonConfirm = (
     {
         className,
         onClick, children,
@@ -32,13 +32,13 @@ export const ListItemButtonConfirm: React.ComponentType<ListItemButtonConfirmPro
         primary, primaryTypographyProps,
         secondary, secondaryTypographyProps,
         ...props
-    },
+    }: ListItemButtonConfirmProps,
 ) => {
-    const {confirmShow, handleClick, setConfirmShow} = useWithConfirm(resetVal ? [resetVal] : undefined, confirmDuration)
+    const {confirmShow, handleClick, setConfirmShow} = useWithConfirm<HTMLDivElement>(resetVal, confirmDuration)
     const theme = useTheme()
     const btnSx = buttonColors(theme, colorMap)
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(!disabled) return
         setConfirmShow(false)
     }, [disabled, setConfirmShow])
@@ -55,7 +55,7 @@ export const ListItemButtonConfirm: React.ComponentType<ListItemButtonConfirmPro
         }
         onClick={(e) => {
             e.stopPropagation()
-            handleClick(confirmShow, onClick)
+            handleClick(confirmShow, onClick, e)
         }}
     >
         <ListItemIcon>
