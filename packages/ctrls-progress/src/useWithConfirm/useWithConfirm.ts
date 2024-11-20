@@ -1,20 +1,25 @@
-import React from 'react'
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
 
-export const useWithConfirm = (resetVal?: any[], confirmDuration: number = 2500) => {
-    const [confirmShow, setConfirmShow] = React.useState(false)
-    const timerConfirm = React.useRef<number | undefined>()
-    React.useEffect(() => {
-        return () => window.clearTimeout(timerConfirm.current)
-    }, [timerConfirm])
-    React.useEffect(() => {
+export const useWithConfirm = <TElement extends HTMLElement>(
+    resetVal?: any,
+    confirmDuration: number = 2500,
+) => {
+    const [confirmShow, setConfirmShow] = useState(false)
+    const timerConfirm = useRef<number | undefined>()
+
+    useEffect(() => {
         setConfirmShow(false)
-        // eslint-disable-next-line
-    }, [...resetVal || []])
+        return () => window.clearTimeout(timerConfirm.current)
+    }, [resetVal])
 
-    const handleClick = React.useCallback((confirmShow: boolean, onClick: () => void) => {
+    const handleClick = useCallback((
+        confirmShow: boolean,
+        onClick: (e: MouseEvent<TElement>) => void,
+        e: MouseEvent<TElement>,
+    ) => {
         if(confirmShow) {
             setConfirmShow(false)
-            onClick()
+            onClick(e)
         } else {
             setConfirmShow(true)
             window.clearTimeout(timerConfirm.current)

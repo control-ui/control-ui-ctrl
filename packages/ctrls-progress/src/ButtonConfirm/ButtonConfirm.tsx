@@ -1,12 +1,12 @@
-import React from 'react'
+import { MouseEvent, ReactNode, useEffect } from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 
 export interface WithConfirmProps {
-    confirmIcon: React.ReactNode
-    confirmText: React.ReactNode | string
+    confirmIcon: ReactNode
+    confirmText: ReactNode | string
     // todo: add optional dialog view instead of button label switch
     // confirmDialog?: boolean
     confirmDuration?: number
@@ -24,11 +24,11 @@ export type ButtonConfirmProps =
     {
         classNameWrapper?: string
         resetVal?: any
-        onClick: () => void
+        onClick: (e: MouseEvent<HTMLButtonElement>) => void
         colorMap?: ColorMap
     }
 
-export const ButtonConfirm: React.ComponentType<ButtonConfirmProps> = (
+export const ButtonConfirm = (
     {
         className, classNameWrapper,
         style,
@@ -40,13 +40,13 @@ export const ButtonConfirm: React.ComponentType<ButtonConfirmProps> = (
         resetVal, disabled,
         colorMap,
         ...props
-    },
+    }: ButtonConfirmProps,
 ) => {
-    const {confirmShow, handleClick, setConfirmShow} = useWithConfirm(resetVal ? [resetVal] : undefined, confirmDuration)
+    const {confirmShow, handleClick, setConfirmShow} = useWithConfirm<HTMLButtonElement>(resetVal, confirmDuration)
     const theme = useTheme()
     const btnSx = buttonColors(theme, colorMap)
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(!disabled) return
         setConfirmShow(false)
     }, [disabled, setConfirmShow])
@@ -64,7 +64,7 @@ export const ButtonConfirm: React.ComponentType<ButtonConfirmProps> = (
             }
             onClick={(e) => {
                 e.stopPropagation()
-                handleClick(confirmShow, onClick)
+                handleClick(confirmShow, onClick, e)
             }}
             endIcon={confirmShow && confirmIcon ? confirmIcon : endIcon}
         >

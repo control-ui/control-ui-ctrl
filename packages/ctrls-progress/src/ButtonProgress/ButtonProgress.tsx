@@ -1,9 +1,9 @@
-import React from 'react'
+import { CSSProperties, MouseEvent } from 'react'
 import { useTheme, SxProps } from '@mui/material/styles'
 import CircularProgress from '@mui/material/CircularProgress'
 import { green } from '@mui/material/colors'
 import Button, { ButtonProps } from '@mui/material/Button'
-import { ProgressStateValues, ps } from 'react-progress-state'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
 import Box from '@mui/material/Box'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { WithConfirmProps } from '@ui-controls/progress/ButtonConfirm'
@@ -13,8 +13,8 @@ export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithCon
     progress: ProgressStateValues
     resetVal?: any
     classNameWrapper?: string
-    onClick: () => void
-    boxStyle?: React.CSSProperties
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
+    boxStyle?: CSSProperties
     boxSx?: SxProps
     // when `true` will display any `progress` color from mount on,
     // `false` forces `ps.none`, only when then changed it shows the actual button-state
@@ -22,7 +22,7 @@ export type ButtonProgressProps = Omit<ButtonProps, 'onClick'> & Partial<WithCon
     colorMap?: ColorMap
 }
 
-export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
+export const ButtonProgress = (
     {
         progress, resetVal,
         className, classNameWrapper,
@@ -36,12 +36,12 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
         showInitial,
         colorMap,
         ...props
-    },
+    }: ButtonProgressProps,
 ) => {
     const {
         progressState, currentProgress,
         handleClick, confirmShow,
-    } = useButtonProgress(progress, resetVal, disabled, showInitial, confirmDuration, resetDelay)
+    } = useButtonProgress<HTMLButtonElement>(progress, resetVal, disabled, showInitial, confirmDuration, resetDelay)
     const theme = useTheme()
     const btnSx = buttonColors(theme, colorMap)
     const hasConfirm = Boolean(confirmIcon || confirmText)
@@ -58,7 +58,7 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
         <Button
             {...props}
             // `disabled` must check against the original `progress`, to be able to not rely on any coloring logic
-            disabled={disabled || progress === ps.start}
+            disabled={disabled || progress === ps.loading}
             className={className}
             sx={{
                 ...sx || {},
@@ -74,9 +74,9 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
                 e.stopPropagation()
                 e.preventDefault()
                 if(hasConfirm) {
-                    handleClick(confirmShow, onClick)
+                    handleClick(confirmShow, onClick, e)
                 } else {
-                    onClick()
+                    onClick(e)
                 }
             }}
             endIcon={
@@ -87,7 +87,7 @@ export const ButtonProgress: React.ComponentType<ButtonProgressProps> = (
             {hasConfirm && confirmShow && confirmText ? confirmText : children}
         </Button>
 
-        {currentProgress === ps.start &&
+        {currentProgress === ps.loading &&
             <CircularProgress
                 size={24}
                 style={{

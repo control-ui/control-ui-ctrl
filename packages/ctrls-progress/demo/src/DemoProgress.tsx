@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonProgress } from '@ui-controls/progress/ButtonProgress'
 import { IconButtonProgress } from '@ui-controls/progress/IconButtonProgress'
-import { ps, useProgress } from 'react-progress-state'
+import { ps, useProgress } from 'react-progress-state/useProgressNext'
 import Box from '@mui/material/Box'
 import IcLogin from '@mui/icons-material/Login'
 import Button from '@mui/material/Button'
@@ -31,7 +31,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading1()
                             window.setTimeout(() => {
-                                const isPid = setLoading1(ps.done, undefined, pid)
+                                const isPid = setLoading1(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
@@ -47,7 +47,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading1()
                             window.setTimeout(() => {
-                                const isPid = setLoading1(ps.done, undefined, pid)
+                                const isPid = setLoading1(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
@@ -81,7 +81,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading3()
                             window.setTimeout(() => {
-                                const isPid = setLoading3(ps.done, undefined, pid)
+                                const isPid = setLoading3(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
@@ -120,7 +120,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading1()
                             window.setTimeout(() => {
-                                const isPid = setLoading1(ps.done, undefined, pid)
+                                const isPid = setLoading1(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
@@ -137,7 +137,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading1()
                             window.setTimeout(() => {
-                                const isPid = setLoading1(ps.done, undefined, pid)
+                                const isPid = setLoading1(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
@@ -173,7 +173,7 @@ export const DemoProgress: React.FC<{}> = () => {
                         onClick={() => {
                             const pid = startLoading3()
                             window.setTimeout(() => {
-                                const isPid = setLoading3(ps.done, undefined, pid)
+                                const isPid = setLoading3(ps.success, undefined, pid)
                                 if(!isPid) return
                                 console.log('done', pid)
                             }, 600)
