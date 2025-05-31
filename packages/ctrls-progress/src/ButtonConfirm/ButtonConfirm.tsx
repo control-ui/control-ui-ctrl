@@ -1,3 +1,4 @@
+import { xsx } from '@ui-controls/progress/xsx'
 import { MouseEvent, ReactNode, useEffect } from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
@@ -57,10 +58,10 @@ export const ButtonConfirm = (
             className={className}
             disabled={disabled}
             sx={
-                confirmShow ? {
-                    ...sx,
-                    ...btnSx.buttonConfirm,
-                } : sx
+                confirmShow ? xsx(
+                    sx,
+                    btnSx.buttonConfirm,
+                ) : sx
             }
             onClick={(e) => {
                 e.stopPropagation()

@@ -1,3 +1,4 @@
+import { xsx } from '@ui-controls/progress/xsx'
 import { CSSProperties, MouseEvent } from 'react'
 import { useTheme, SxProps } from '@mui/material/styles'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -48,28 +49,27 @@ export const ButtonProgress = (
     return <Box
         className={classNameWrapper}
         style={boxStyle}
-        sx={{
+        sx={xsx({
             marginLeft: 0,
             position: 'relative',
             display: fullWidth ? 'block' : 'inline-block',
-            ...boxSx || {},
-        }}
+        }, boxSx)}
     >
         <Button
             {...props}
             // `disabled` must check against the original `progress`, to be able to not rely on any coloring logic
             disabled={disabled || progress === ps.loading}
             className={className}
-            sx={{
-                ...sx || {},
+            sx={xsx(
+                sx,
                 // todo: don't show "success" when nothing else happened after an disable and was "success" before and "not just mounted" / fixes: green-when-enabled/mounted-again
-                ...(hasConfirm && confirmShow ?
+                hasConfirm && confirmShow ?
                     btnSx.buttonConfirm :
                     progressState === 1 ?
                         btnSx.buttonSuccess :
                         progressState === -1 ?
-                            btnSx.buttonError : {}),
-            }}
+                            btnSx.buttonError : {},
+            )}
             onClick={(e) => {
                 e.stopPropagation()
                 e.preventDefault()
