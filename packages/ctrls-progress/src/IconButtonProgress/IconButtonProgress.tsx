@@ -1,3 +1,4 @@
+import { xsx } from '@ui-controls/progress/xsx'
 import { CSSProperties, MouseEvent, ReactNode } from 'react'
 import Tooltip, { TooltipProps } from '@mui/material/Tooltip'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
@@ -34,7 +35,7 @@ export type IconButtonProgressProps = IconButtonProgressConfirmProps & Omit<Icon
     // when `true` enabled pointer-events on the tooltip
     tooltipInteractive?: boolean
     colorMap?: ColorMap
-    TooltipProps?: Omit<TooltipProps, 'title'>
+    TooltipProps?: Omit<TooltipProps, 'title' | 'children'>
 }
 
 export const IconButtonProgress = (
@@ -77,18 +78,20 @@ export const IconButtonProgress = (
                 {...props}
                 size={size}
                 disabled={disabled || progress === ps.loading}
-                sx={{
-                    marginLeft: 0,
-                    position: 'relative',
-                    display: 'inline-block',
-                    ...sx,
-                    ...(hasConfirm && confirmShow ?
+                sx={xsx(
+                    {
+                        marginLeft: 0,
+                        position: 'relative',
+                        display: 'inline-block',
+                    },
+                    sx,
+                    hasConfirm && confirmShow ?
                         btnSx.buttonConfirm :
                         progressState === 1 ?
                             btnSx.buttonSuccess :
                             progressState === -1 ?
-                                btnSx.buttonError : {}),
-                }}
+                                btnSx.buttonError : {},
+                )}
                 onFocusVisible={e => {
                     e.stopPropagation()
                 }}

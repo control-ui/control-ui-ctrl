@@ -1,3 +1,4 @@
+import { xsx } from '@ui-controls/progress/xsx'
 import { MouseEvent, ReactNode, useEffect } from 'react'
 import { useTheme } from '@mui/material/styles'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
@@ -15,7 +16,7 @@ export type IconButtonConfirmProps = {
     // when `true` enabled pointer-events on the tooltip
     tooltipInteractive?: boolean
     colorMap?: ColorMap
-    TooltipProps?: Omit<TooltipProps, 'title'>
+    TooltipProps?: Omit<TooltipProps, 'title' | 'children'>
 } & Omit<IconButtonProps, 'onClick'>
 
 export const IconButtonConfirm = (
@@ -52,10 +53,10 @@ export const IconButtonConfirm = (
             {...props}
             disabled={disabled}
             sx={
-                confirmShow ? {
-                    ...sx,
-                    ...btnSx.buttonConfirm,
-                } : sx
+                confirmShow ? xsx(
+                    sx,
+                    btnSx.buttonConfirm,
+                ) : sx
             }
             onClick={(e) => {
                 e.stopPropagation()

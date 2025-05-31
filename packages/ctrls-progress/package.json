@@ -1,6 +1,6 @@
 {
     "name": "@ui-controls/progress",
-    "version": "0.1.0-alpha.0",
+    "version": "0.1.0-alpha.1",
     "description": "Material-UI Button + IconButton with progress (loading/error/success)",
     "homepage": "https://bemit.codes",
     "author": "Michael Becker <michael@bemit.codes>",
