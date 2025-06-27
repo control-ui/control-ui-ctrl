@@ -5,7 +5,7 @@ export const useWithConfirm = <TElement extends HTMLElement>(
     confirmDuration: number = 2500,
 ) => {
     const [confirmShow, setConfirmShow] = useState(false)
-    const timerConfirm = useRef<number | undefined>()
+    const timerConfirm = useRef<number | undefined>(undefined)
 
     useEffect(() => {
         setConfirmShow(false)

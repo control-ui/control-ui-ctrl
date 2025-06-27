@@ -30,8 +30,9 @@ export const ListItemButtonConfirm = (
         sx,
         resetVal, disabled,
         colorMap,
-        primary, primaryTypographyProps,
-        secondary, secondaryTypographyProps,
+        primary, secondary,
+        // eslint-disable-next-line deprecation/deprecation
+        primaryTypographyProps, secondaryTypographyProps,
         ...props
     }: ListItemButtonConfirmProps,
 ) => {

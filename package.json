@@ -15,7 +15,7 @@
         "profile": "cross-env NODE_OPTIONS='--max-old-space-size=4096' NODE_ENV=production node packerConfig.js --build --profile",
         "clean-dist": "rimraf dist && rimraf coverage && node packerConfig.js --clean",
         "clean-npm": "rimraf --glob **/*/node_modules",
-        "predev": "npm run clean",
+        "precheck": "npm run clean-dist",
         "check": "npm run lint && npm run tscheck && npm run test",
         "tscheck": "lerna run tscheck",
         "lint": "cross-env NODE_ENV=test NODE_OPTIONS=\"--max-old-space-size=8192 --no-deprecation --experimental-vm-modules --unhandled-rejections=strict\" eslint -c=.eslintrc --ext=.tsx,.ts --max-warnings=0 'packages'",
@@ -27,8 +27,7 @@
     "author": "Michael Becker, https://i-am-digital.eu",
     "license": "MIT",
     "devDependencies": {
-        "@types/react": "^18.0",
-        "@types/react-router-dom": "^5.3.3",
+        "@types/react": "^19.0",
         "babel-plugin-named-asset-import": "^0.3.8",
         "cross-env": "^6.0.3",
         "eslint-plugin-react-hooks": "^5.0.0",
@@ -37,7 +36,7 @@
         "rimraf": "^5.0.10",
         "sloc": "^0.3.2",
         "ts-node": "^10.9.2",
-        "typescript": "~5.3.3"
+        "typescript": "~5.4.5"
     },
     "workspaces": [
         "packages/*"

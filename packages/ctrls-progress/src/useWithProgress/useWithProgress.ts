@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
 
 export const useWithProgress = (progress: ProgressStateValues, resetVal?: any, resetDelay: number = 1800) => {
-    const timer = useRef<number>()
+    const timer = useRef<number | undefined>(undefined)
     const [progressState, setProgressState] = useState<0 | 1 | -1>(0)
     useEffect(() => {
         setProgressState(0)
