@@ -1,1 +1,1 @@
-export * from './useWithConfirm'
+export * from './useWithConfirm.js'

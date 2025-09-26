@@ -289,11 +289,3 @@ export const DemoPage = () => {
     </>
 }
 ```
-
-## License
-
-This project is free software distributed under the **MIT License**.
-
-See: [LICENSE](https://github.com/control-ui/control-ui-ctrl/blob/main/LICENSE).
-
-© 2023 bemit UG (haftungsbeschränkt)

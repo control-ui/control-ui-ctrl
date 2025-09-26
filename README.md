@@ -22,12 +22,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-This project is free software distributed under the **MIT License**.
-
-See: [LICENSE](LICENSE).
-
-© 2024 [bemit UG (haftungsbeschränkt)](https://bemit.codes)
-
-***
-
-Created by [Michael Becker](https://i-am-digital.eu)
+This project is free software distributed under the [**MIT License**](LICENSE).

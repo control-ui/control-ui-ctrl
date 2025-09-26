@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonProgress } from '@ui-controls/progress/ButtonProgress'
 import { IconButtonProgress } from '@ui-controls/progress/IconButtonProgress'
-import { ps, useProgress } from 'react-progress-state/useProgressNext'
+import { ps, useProgress } from 'react-progress-state/useProgress'
 import Box from '@mui/material/Box'
 import IcDeleteConfirm from '@mui/icons-material/Delete'
 import IcDelete from '@mui/icons-material/DeleteOutline'

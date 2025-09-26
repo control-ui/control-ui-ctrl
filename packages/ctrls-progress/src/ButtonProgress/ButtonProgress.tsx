@@ -4,7 +4,7 @@ import { useTheme, SxProps } from '@mui/material/styles'
 import CircularProgress from '@mui/material/CircularProgress'
 import { green } from '@mui/material/colors'
 import Button, { ButtonProps } from '@mui/material/Button'
-import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgress'
 import Box from '@mui/material/Box'
 import { buttonColors, ColorMap } from '@ui-controls/progress/buttonColors'
 import { WithConfirmProps } from '@ui-controls/progress/ButtonConfirm'
@@ -46,6 +46,7 @@ export const ButtonProgress = (
     const theme = useTheme()
     const btnSx = buttonColors(theme, colorMap)
     const hasConfirm = Boolean(confirmIcon || confirmText)
+    const loading = progress === ps.loading
     return <Box
         className={classNameWrapper}
         style={boxStyle}
@@ -58,7 +59,9 @@ export const ButtonProgress = (
         <Button
             {...props}
             // `disabled` must check against the original `progress`, to be able to not rely on any coloring logic
-            disabled={disabled || progress === ps.loading}
+            disabled={disabled}
+            aria-disabled={loading || props['aria-disabled']}
+            classes={{...props.classes, root: loading ? 'Mui-disabled' : ''}}
             className={className}
             sx={xsx(
                 sx,
@@ -71,6 +74,8 @@ export const ButtonProgress = (
                             btnSx.buttonError : {},
             )}
             onClick={(e) => {
+                if(disabled || loading) return
+
                 e.stopPropagation()
                 e.preventDefault()
                 if(hasConfirm) {

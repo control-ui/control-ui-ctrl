@@ -1,11 +1,37 @@
 import path from 'path'
 import url from 'url'
 import {packer, webpack} from 'lerna-packer'
-import {babelTargetsLegacyCjsFirst} from 'lerna-packer/packer/babelEsModules.js'
 import {makeModulePackageJson, copyRootPackageJson, transformerForLegacyCjsFirst} from 'lerna-packer/packer/modulePackages.js'
 import fs from 'fs'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
+
+const babelTargetsCjsEsm = [
+    {
+        distSuffix: '',
+        args: [
+            '--env-name', 'cjs', '--no-comments', // '--copy-files', '--no-copy-ignored',
+            '--out-file-extension', '.cjs',
+            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
+            '--ignore', '**/*.d.ts',
+            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
+            '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
+        ],
+    },
+    {
+        distSuffix: '/esm',
+        // distSuffix: '', // for mjs it would need a distSuffix
+        args: [
+            // '--env-name', 'mjs',
+            // '--out-file-extension', '.mjs',
+            '--no-comments',
+            '--extensions', '.ts', '--extensions', '.tsx', '--extensions', '.js', '--extensions', '.jsx',
+            '--ignore', '**/*.d.ts',
+            '--ignore', '**/*.test.tsx', '--ignore', '**/*.test.ts', '--ignore', '**/*.test.js',
+            '--ignore', '**/*.mock.ts', '--ignore', '**/*.mock.js',
+        ],
+    },
+]
 
 packer({
     apps: {
@@ -37,7 +63,7 @@ packer({
             name: '@ui-controls/progress',
             root: path.resolve(__dirname, 'packages', 'ctrls-progress'),
             entry: path.resolve(__dirname, 'packages', 'ctrls-progress/src/'),
-            babelTargets: babelTargetsLegacyCjsFirst,
+            babelTargets: babelTargetsCjsEsm,
         },
     },
 }, __dirname, {

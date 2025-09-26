@@ -1,1 +1,1 @@
-export * from './IconButtonProgress'
+export * from './IconButtonProgress.js'

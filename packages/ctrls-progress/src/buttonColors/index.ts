@@ -1,1 +1,1 @@
-export * from './buttonColors'
+export * from './buttonColors.js'

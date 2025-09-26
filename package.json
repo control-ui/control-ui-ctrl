@@ -29,6 +29,7 @@
     "devDependencies": {
         "@types/react": "^19.0",
         "babel-plugin-named-asset-import": "^0.3.8",
+        "babel-plugin-replace-import-extension": "^1.1.5",
         "cross-env": "^6.0.3",
         "eslint-plugin-react-hooks": "^5.0.0",
         "lerna": "^8.1.9",

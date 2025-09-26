@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonProgress } from '@ui-controls/progress/ButtonProgress'
 import { IconButtonProgress } from '@ui-controls/progress/IconButtonProgress'
-import { ps, useProgress } from 'react-progress-state/useProgressNext'
+import { ps, useProgress } from 'react-progress-state/useProgress'
 import Box from '@mui/material/Box'
 import IcLogin from '@mui/icons-material/Login'
 import Button from '@mui/material/Button'
@@ -87,6 +87,7 @@ export const DemoProgress: React.FC<{}> = () => {
                             }, 600)
                         }}
                         tooltip={'submit w/ success'}
+                        tooltipLoading={'is loading'}
                     >
                         <IcLogin/>
                     </IconButtonProgress>
@@ -104,6 +105,7 @@ export const DemoProgress: React.FC<{}> = () => {
                             }, 600)
                         }}
                         tooltip={'submit w/ error'}
+                        tooltipLoading={'is loading'}
                     >
                         <IcLogin/>
                     </IconButtonProgress>

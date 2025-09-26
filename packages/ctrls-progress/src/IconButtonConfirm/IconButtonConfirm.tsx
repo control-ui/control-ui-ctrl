@@ -27,7 +27,7 @@ export const IconButtonConfirm = (
         sx,
         children,
         resetVal, disabled,
-        tooltipInteractive = false,
+        tooltipInteractive = true,
         colorMap,
         TooltipProps,
         ...props

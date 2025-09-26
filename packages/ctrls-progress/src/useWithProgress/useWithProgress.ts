@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgress'
 
 export const useWithProgress = (progress: ProgressStateValues, resetVal?: any, resetDelay: number = 1800) => {
     const timer = useRef<number | undefined>(undefined)

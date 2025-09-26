@@ -2,7 +2,7 @@ import { xsx } from '@ui-controls/progress/xsx'
 import { CSSProperties, MouseEvent, ReactNode } from 'react'
 import Tooltip, { TooltipProps } from '@mui/material/Tooltip'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgress'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useTheme, SxProps } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -20,10 +20,11 @@ export type IconButtonProgressConfirmProps = {
     confirmDuration?: number
 }
 
-export type IconButtonProgressProps = IconButtonProgressConfirmProps & Omit<IconButtonProps, 'onClick' | 'onFocusVisible'> & {
+export type IconButtonProgressProps = IconButtonProgressConfirmProps & Omit<IconButtonProps, 'onClick'> & {
     progress: ProgressStateValues
     resetVal?: any
     tooltip: string | NonNullable<ReactNode>
+    tooltipLoading?: string | NonNullable<ReactNode>
     tooltipDisabled?: string | NonNullable<ReactNode>
     onClick: (e: MouseEvent<HTMLButtonElement>) => void
     boxSx?: SxProps
@@ -46,11 +47,12 @@ export const IconButtonProgress = (
         confirmIcon, confirmDuration,
         resetDelay,
         tooltipConfirm, tooltip, tooltipDisabled,
+        tooltipLoading,
         children,
         boxStyle, boxSx,
         sx,
         showInitial,
-        tooltipInteractive = false,
+        tooltipInteractive = true,
         colorMap,
         TooltipProps,
         ...props
@@ -63,9 +65,12 @@ export const IconButtonProgress = (
     const theme = useTheme()
     const btnSx = buttonColors(theme, colorMap)
 
+    const loading = progress === ps.loading
     const hasConfirm = Boolean(tooltipConfirm)
-    const title = disabled && tooltipDisabled ? tooltipDisabled :
-        confirmShow && hasConfirm ? tooltipConfirm : tooltip
+    const title =
+        disabled && tooltipDisabled ? tooltipDisabled :
+            confirmShow && hasConfirm ? tooltipConfirm :
+                loading && typeof tooltipLoading === 'string' ? tooltipLoading : tooltip
 
     return <Tooltip
         title={typeof title === 'undefined' ? '' : title}
@@ -77,7 +82,9 @@ export const IconButtonProgress = (
                 color={'inherit'}
                 {...props}
                 size={size}
-                disabled={disabled || progress === ps.loading}
+                disabled={disabled}
+                aria-disabled={loading || props['aria-disabled']}
+                classes={{...props.classes, root: loading ? 'Mui-disabled' : ''}}
                 sx={xsx(
                     {
                         marginLeft: 0,
@@ -92,10 +99,8 @@ export const IconButtonProgress = (
                             progressState === -1 ?
                                 btnSx.buttonError : {},
                 )}
-                onFocusVisible={e => {
-                    e.stopPropagation()
-                }}
                 onClick={(e) => {
+                    if(disabled || loading) return
                     e.stopPropagation()
                     if(hasConfirm) {
                         handleClick(confirmShow, onClick, e)

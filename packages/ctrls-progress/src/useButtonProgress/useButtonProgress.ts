@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { ProgressStateValues, ps } from 'react-progress-state/useProgressNext'
+import { ProgressStateValues, ps } from 'react-progress-state/useProgress'
 import { useWithConfirm } from '@ui-controls/progress/useWithConfirm'
 import { useWithProgress } from '@ui-controls/progress/useWithProgress'
 
