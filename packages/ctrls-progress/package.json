@@ -1,9 +1,9 @@
 {
     "name": "@ui-controls/progress",
-    "version": "0.1.0",
-    "description": "Material-UI Button + IconButton with progress (loading/error/success)",
-    "homepage": "https://bemit.codes",
-    "author": "Michael Becker <michael@bemit.codes>",
+    "version": "0.2.0",
+    "description": "Material-UI Buttons with progress (loading/error/success) and click-to-confirm colors and interaction flow.",
+    "homepage": "https://github.com/control-ui/control-ui-ctrl/tree/main/packages/ctrls-progress",
+    "author": "Michael Becker <michael@bemit.codes> (https://bemit.codes)",
     "license": "MIT",
     "keywords": [
         "mui",
@@ -23,8 +23,22 @@
     "bugs": {
         "url": "https://github.com/control-ui/control-ui-ctrl/issues"
     },
-    "main": "index.js",
+    "main": "index.cjs",
     "module": "esm/index.js",
+    "exports": {
+        ".": {
+            "types": "./index.d.ts",
+            "import": "./esm/index.js",
+            "require": "./index.cjs"
+        },
+        "./*": {
+            "types": "./*/index.d.ts",
+            "import": "./esm/*/index.js",
+            "require": "./*/index.cjs"
+        },
+        "./package.json": "./package.json",
+        "./esm": null
+    },
     "scripts": {
         "dtsgen": "tsc -d --emitDeclarationOnly --pretty && node ../../tools/merge-dirs build/dts/packages/ctrls-progress/src build && rm -rf build/dts && rm -rf build/**/*.test.* build/**/*.mock.*",
         "__release": "cp package.json build/ && cp package-lock.json build/ && cp README.md build/ && npm publish build"
@@ -40,12 +54,12 @@
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "react": "^19.0",
-        "react-progress-state": "~0.3.5",
+        "react-progress-state": "~0.4.0",
         "react-dom": "^19.0"
     },
     "peerDependencies": {
         "@mui/material": "^5.1 || ^6.1 || ^7.1",
-        "react-progress-state": "~0.3.2",
+        "react-progress-state": "~0.4.0",
         "react": "^18 || ^19",
         "react-dom": "^18 || ^19"
     },

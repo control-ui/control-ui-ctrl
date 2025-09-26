@@ -1,1 +1,1 @@
-export * from './ButtonConfirm'
+export * from './ButtonConfirm.js'
